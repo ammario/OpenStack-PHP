@@ -5,7 +5,7 @@ An OpenStack library for PHP 5.4+
 
 Currently, only Identity and Object Storage is implemented. I plan on implementing Compute next.
 
-Including this library into your application is as simple as
+Adding this library into your application is as simple as
 ```php
 require_once("OpenStack.php");
 ```
@@ -149,7 +149,7 @@ Creating objects may be simply done with a single function
 $Container->createObject("name", "lots of data here");
 ```
 ####Getting Data
-Data may be retrieved by using the object as a string, or with the getData() function.
+Data may be accessed by using the object as a string, or with the getData() function.
 ```php
 echo $Object->getData();
 echo $Object;
