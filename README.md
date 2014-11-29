@@ -89,6 +89,7 @@ print_r($ObjectStore->getMetadata()); //Purely metadata
 print_r($ObjectStore->getContainers()); //Get Container objects
 print_r($ObjectStore->getContainerList()); //Get Containers in neat list
 print_r($ObjectStore->getContainerByName("CDN")); //Get a single Container object
+print_r($ObjectStore->getContainer("CDN")); //Ambiguous with getContainerByName()
 ```
 ####Updating Object Storage Metadata
 Metadata and their respective values will be passed along as headers in compliance with [OpenStack's documentation](http://developer.openstack.org/api-ref-objectstorage-v1.html).
@@ -119,6 +120,7 @@ print_r($Container->getMetadata()); //Get metadata
 print_r($Container->getObjects()); //Get proper objects
 print_r($Container->getObjectList()); //Get Object List
 print_r($Container->getObjectByName("testing")); //Get a single object
+print_r($Container->getObject("testing")); //Ambiguous with getObjectByName()
 ```
 #####Updating Container Metadata
 Metadata and their respective values will be passed along as headers in compliance with [OpenStack's documentation](http://developer.openstack.org/api-ref-objectstorage-v1.html).
