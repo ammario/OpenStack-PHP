@@ -32,9 +32,6 @@
         public $status;
         public $statuscode;
         public $useragent = "PHP OpenStack Client";
-        public $response_body;
-        public $response_header;
-
         public function load($ch, &$headers, &$body)
         {
             curl_setopt($ch, CURLOPT_USERAGENT, $this->useragent);
@@ -43,7 +40,6 @@
             $response = curl_exec($ch);
             $hsize = curl_getinfo($ch, CURLINFO_HEADER_SIZE);
             curl_close($ch);
-            $this->response_header = substr($response, 0, $hsize);
             $headers = explode("\r\n", substr($response, 0, $hsize));
             $tmp = explode(" ", $headers[0]);
             $this->status = "";
@@ -75,7 +71,6 @@
                 }
                 unset($headers[$i]);
             }
-            $this->response_body = substr($response, $hsize);
             $body = substr($response, $hsize);
         }
     }
@@ -300,6 +295,10 @@
             }
             return false;
         }
+        public function getObject($name, $headers = array())
+        {
+            return $this->getObjectByName($name, $headers);
+        }
         public function getMetadata($headers = array())
         {
             $headers[] = "X-Auth-Token: " . $this->ObjectStore->Identity->accessToken->id;
@@ -500,6 +499,10 @@
                 $return_array[] = new OSContainer($key["name"], $this);
             }
             return $return_array;
+        }
+        public function getContainer($name, $headers = array())
+        {
+            return $this->getContainerByName($name, $headers = array());
         }
         public function getContainerList($headers = array())
         {
