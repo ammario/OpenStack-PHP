@@ -1,7 +1,7 @@
 <?php
     /*
      * This library is licensed under the Apache License Version 2.0
-     * Written by Ammar Bandukwala
+     * (c) 2014 Ammar Bandukwala
      */
 
     /*
@@ -278,6 +278,16 @@
             return $return_array;
 
         }
+        public function getObjectList($headers = array())
+        {
+            $return_array = array();
+            $objects = $this->getObjects($headers);
+            foreach($objects as $key)
+            {
+                $return_array[] = $key->name;
+            }
+            return $return_array;
+        }
         public function getObjectByName($name, $headers = array())
         {
             $objects = $this->getObjects($headers);
@@ -348,16 +358,6 @@
                 return false;
             }
             return true;
-        }
-        public function getObjectList($headers = array())
-        {
-            $return_array = array();
-            $objects = $this->getObjects($headers);
-            foreach($objects as $key)
-            {
-                $return_array[] = $key->name;
-            }
-            return $return_array;
         }
         public function __toString()
         {
@@ -501,6 +501,16 @@
             }
             return $return_array;
         }
+        public function getContainerList($headers = array())
+        {
+            $return_array = array();
+            $containers = $this->getContainers($headers);
+            foreach($containers as $key)
+            {
+                $return_array[] = $key->name;
+            }
+            return $return_array;
+        }
         public function getContainerByName($name, $headers = array())
         {
             $return_array = array();
@@ -543,16 +553,6 @@
                 return false;
             }
             return new OSContainer($name, $this);
-        }
-        public function getContainerList($headers = array())
-        {
-            $return_array = array();
-            $containers = $this->getContainers($headers);
-            foreach($containers as $key)
-            {
-                $return_array[] = $key->name;
-            }
-            return $return_array;
         }
     }
 
