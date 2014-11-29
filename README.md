@@ -58,7 +58,7 @@ $Identity->login();
 Services, their respective metadata, and endpoints will be stored in the $Identity->serviceCatalog object (of type OSServiceCatalog.) You can get certain services by either name or type.
 ```php
 print_r($Identity->serviceCatalog->getServicesByName("swift"));
-print_r($Identity->serviceCatalog->getServicesByName("object-store"));
+print_r($Identity->serviceCatalog->getServicesByType("object-store"));
 print_r($Identity->serviceCatalog->getServices());
 ```
 You can get specific endpoints by region
@@ -104,7 +104,7 @@ $Container = $ObjectStore->getContainerByName("testing");
 ####Creating Container
 Containers may be created with a single function on the ObjectStore level.
 ```php
-$ObjectStore->createContainer("test");
+$Container = $ObjectStore->createContainer("test");
 ```
 ####Deleting Container
 Deleting may be done with a single function.
@@ -121,13 +121,13 @@ print_r($Container->getObjectList()); //Get Object List
 print_r($Container->getObjectByName("testing")); //Get a single object
 ```
 #####Updating Container Metadata
-This function should be used as the Update Object Storage metadata function is.
+Metadata and their respective values will be passed along as headers in compliance with [OpenStack's documentation](http://developer.openstack.org/api-ref-objectstorage-v1.html).
 ```php
 $Container->updateMetadata(array("X-Container-Meta-Author: John"));
 $Container->updateMetadata(array("X-Remove-Container-Meta-Author: John"));
 ```
 ###Objects
-Containers are independent (PHP)objects, and inherently store all the information they need.
+Objects are independent (PHP)objects, and inherently store all the information they need.
 ```php
 $Object = $Container->getObjectByName("testing");
 ```
@@ -138,13 +138,13 @@ print_r($Object->getDetails()); //Gets object details and data
 print_r($Object->getMetadata()); //Just get object metadata
 ```
 #####Updating Object Metadata
-This function should be used as the other Update Metadata functions are.
+Metadata and their respective values will be passed along as headers in compliance with [OpenStack's documentation](http://developer.openstack.org/api-ref-objectstorage-v1.html).
 ```php
 $Object->updateMetadata(array("X-Object-Meta-Author: John"));
 $Object->updateMetadata(array("X-Remove-Object-Meta-Author: John"));
 ```
 ####Creating Objects
-Creating objects may be simply done with a single function
+Creating objects may be simply done with a single function. If an object with the same name already exists, it is overwritten.
 ```php
 $Container->createObject("name", "lots of data here");
 ```
