@@ -1,6 +1,6 @@
 <?php
     /*
-     * This library is licensed under the Apache License Version 2.0
+     * This library is licensed under the MIT License
      * (c) 2014 Ammar Bandukwala
      */
 
